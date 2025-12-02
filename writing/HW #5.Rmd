@@ -21,13 +21,11 @@ homicides <- read_csv("../data/homicide-data.csv")
 
 ```{r, filtering to Oakland, CA}
 oak_homicides <- homicides %>% 
-  filter(city == "Oakland")
-```
-
-```{r}
-oak_homicides <- st_as_sf(oak_homicides, coords = c("lon", "lat")) %>% 
+  filter(city == "Oakland") %>% 
+  st_as_sf(coords = c("lon", "lat")) %>% 
   st_set_crs(4269)
 ```
+
 
 ```{r, oakland sf}
 oakland <- places(state = "CA", 
@@ -41,8 +39,6 @@ alameda_bg <- block_groups(state = "CA",
                            class = "sf")
 
 oakland_bg <- st_filter(alameda_bg, oakland)
-plot(oakland_bg)
-
 ```
 
 ```{r}
