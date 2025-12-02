@@ -47,7 +47,7 @@ plot(oakland_bg)
 
 ```{r}
 ggplot() +
-  geom_sf(data = alameda_bg, aes()) +
+  geom_sf(data = oakland_bg, aes()) +
   geom_sf(data = oak_homicides, aes(color = disposition))
 ```
 
