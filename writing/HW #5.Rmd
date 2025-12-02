@@ -29,7 +29,25 @@ oak_homicides <- st_as_sf(oak_homicides, coords = c("lon", "lat")) %>%
   st_set_crs(4269)
 ```
 
+```{r, oakland sf}
+oakland <- places(state = "CA", 
+                           cb = TRUE, 
+                           class = "sf") %>% 
+  filter(NAME == "Oakland")
 
+alameda_bg <- block_groups(state = "CA", 
+                           county = "Alameda", 
+                           cb = TRUE, 
+                           class = "sf")
 
+oakland_bg <- st_filter(alameda_bg, oakland)
+plot(oakland_bg)
 
+```
+
+```{r}
+ggplot() +
+  geom_sf(data = alameda_bg, aes()) +
+  geom_sf(data = oak_homicides, aes(color = disposition))
+```
 
