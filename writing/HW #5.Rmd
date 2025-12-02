@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, libraries}
 library(tidyverse)
+library(tigris)
+library(sf)
 ```
 
 ```{r, reading in homicide csv}
@@ -21,4 +23,13 @@ homicides <- read_csv("../data/homicide-data.csv")
 oak_homicides <- homicides %>% 
   filter(city == "Oakland")
 ```
+
+```{r}
+oak_homicides <- st_as_sf(oak_homicides, coords = c("lon", "lat")) %>% 
+  st_set_crs(4269)
+```
+
+
+
+
 
