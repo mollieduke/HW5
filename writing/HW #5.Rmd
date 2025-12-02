@@ -9,3 +9,16 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, libraries}
+library(tidyverse)
+```
+
+```{r, reading in homicide csv}
+homicides <- read_csv("../data/homicide-data.csv")
+```
+
+```{r, filtering to Oakland, CA}
+oak_homicides <- homicides %>% 
+  filter(city == "Oakland")
+```
+
