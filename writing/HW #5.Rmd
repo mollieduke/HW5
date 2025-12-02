@@ -1,7 +1,7 @@
 ---
 title: 'HW #5'
 author: "Molly Murphy"
-date: "2025-11-12"
+date: "2025-12-01"
 output: word_document
 ---
 
@@ -23,7 +23,9 @@ homicides <- read_csv("../data/homicide-data.csv")
 oak_homicides <- homicides %>% 
   filter(city == "Oakland") %>% 
   st_as_sf(coords = c("lon", "lat")) %>% 
-  st_set_crs(4269)
+  st_set_crs(4269) %>% 
+  mutate(victim_race = factor(victim_race),
+         victim_race = fct_lump_n(victim_race, n = 3))
 ```
 
 
@@ -44,6 +46,6 @@ oakland_bg <- st_filter(alameda_bg, oakland)
 ```{r}
 ggplot() +
   geom_sf(data = oakland_bg, aes()) +
-  geom_sf(data = oak_homicides, aes(color = disposition))
+  geom_sf(data = oak_homicides, aes(color = victim_race))
 ```
 
