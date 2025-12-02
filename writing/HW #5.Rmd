@@ -2,7 +2,7 @@
 title: 'HW #5'
 author: "Molly Murphy"
 date: "2025-12-01"
-output: word_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(tigris)
 library(sf)
+library(ggthemes)
 ```
 
 ```{r, reading in homicide csv}
@@ -43,9 +44,14 @@ alameda_bg <- block_groups(state = "CA",
 oakland_bg <- st_filter(alameda_bg, oakland)
 ```
 
-```{r}
+```{r, plot}
 ggplot() +
-  geom_sf(data = oakland_bg, aes()) +
-  geom_sf(data = oak_homicides, aes(color = victim_race))
+  geom_sf(data = oakland_bg, aes(), fill = "white") +
+  geom_sf(data = oak_homicides, aes(color = victim_race), size = 0.6) +
+  facet_wrap(. ~ disposition, ncol = 2) +
+  theme_few() +
+  labs(color = "Race of Victim", y = "Latitude", x = "Longitude") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  ggtitle("Homicides in Oakland, CA by status") 
 ```
 
