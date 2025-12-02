@@ -1,0 +1,11 @@
+---
+title: 'HW #5'
+author: "Molly Murphy"
+date: "2025-11-12"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
